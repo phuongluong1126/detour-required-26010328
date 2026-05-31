@@ -288,7 +288,7 @@ export default function Closing() {
       {/* Footer line */}
       <div className="absolute bottom-0 left-0 right-0 py-4 border-t border-white/5">
         <p className="text-center text-white/20 text-xs">
-          Individual Leadership Styles Exercise · Leadership Development Studies · MBA Program
+          Created by Lương Kim Phượng — a dreamer, but not always asleep to dream ✨
         </p>
       </div>
     </section>

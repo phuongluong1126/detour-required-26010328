@@ -387,8 +387,15 @@ export default function Hero() {
           >
             <div className="w-8 h-px bg-lavender-400" />
             <div className="flex items-center gap-3">
-              <div className="w-20 h-28 rounded-2xl overflow-hidden ring-2 ring-lavender-300/60 shrink-0 shadow-md">
-                <img src={PROFILE_IMG} alt="Phoebe" className="w-full h-full object-cover object-top" />
+              <div
+                className="relative w-28 h-36 rounded-2xl overflow-hidden ring-2 ring-lavender-300/60 shrink-0 shadow-md group cursor-pointer"
+                onClick={() => window.__openLightbox?.({ src: PROFILE_IMG, alt: 'Luong Kim Phuong', caption: 'Developer at FPT Software · "I build things, teach people, and figure out the rest — one detour at a time."' })}
+              >
+                <img src={PROFILE_IMG} alt="Phoebe" className="w-full h-full object-cover object-top transition-opacity duration-300 group-hover:opacity-80" />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: 'rgba(20,8,44,0.4)', backdropFilter: 'blur(2px)' }}>
+                  <span className="text-lg">🔍</span>
+                </div>
               </div>
               <div>
                 <p className="text-sm font-semibold text-plum-900 tracking-tight">Lương Kim Phượng</p>
