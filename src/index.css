@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Scroll-snap: each chapter snaps into view like a book page */
+    scroll-snap-type: y mandatory;
+  }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    @apply bg-cream-50 text-plum-900 antialiased;
+  }
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  /* Chapter label above section titles */
+  .chapter-label {
+    @apply text-xs font-semibold uppercase tracking-[0.3em] text-lavender-500 mb-3 flex items-center gap-2;
+  }
+  .chapter-label::before {
+    content: '';
+    @apply inline-block w-6 h-px bg-lavender-400;
+  }
+
+  /* Display heading (serif) */
+  .section-title {
+    @apply font-display text-4xl md:text-5xl font-bold tracking-tight leading-tight text-plum-900;
+  }
+
+  /* Story chapter snap point — each section snaps into view */
+  .story-chapter {
+    scroll-snap-align: start;
+    min-height: 100vh;
+  }
+
+  /* Light glass card */
+  .card-light {
+    @apply bg-white/70 rounded-2xl border border-lavender-100/80 shadow-sm
+           hover:shadow-lg hover:border-lavender-200 transition-all duration-300;
+    backdrop-filter: blur(12px);
+  }
+
+  .tag-light {
+    @apply inline-block px-3 py-1 rounded-full text-xs font-medium border;
+  }
+}
+
+@layer utilities {
+  .text-gradient-violet {
+    @apply bg-gradient-to-r from-lavender-500 to-blush-500 bg-clip-text text-transparent;
+  }
+  .text-gradient-rose {
+    @apply bg-gradient-to-r from-blush-400 to-blush-600 bg-clip-text text-transparent;
+  }
+  .text-gradient-warm {
+    @apply bg-gradient-to-r from-lavender-400 via-blush-400 to-orange-300 bg-clip-text text-transparent;
+  }
+  .bg-glass-light {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .glow-violet {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.25), 0 0 80px rgba(139, 92, 246, 0.1);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #f8f3ff; }
+::-webkit-scrollbar-thumb { background: #bea8ff; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #a07ff5; }
+
+/* Story section: fade-up on enter */
+.story-section-enter {
+  animation: storyEnter 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes storyEnter {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* Floating sparkle particles */
+@keyframes sparkle {
+  0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; }
+  50%       { transform: scale(1) rotate(180deg); opacity: 1; }
+}
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f0abfc, #c084fc);
+  animation: sparkle 3s ease-in-out infinite;
+}
