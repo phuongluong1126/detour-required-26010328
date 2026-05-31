@@ -477,13 +477,54 @@ export function PrologueScene({ onDismiss }) {
       <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-20 px-8 max-w-5xl w-full">
 
         {/* Big cat — the narrator appears */}
-        <motion.div
-          initial={{ y: 60, opacity: 0, scale: 0.75 }}
-          animate={{ y: 0,  opacity: 1, scale: 1.00 }}
-          transition={{ delay: 0.25, duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <CatCanvas emotion="welcome" width={280} height={330} />
-        </motion.div>
+        <div className="relative flex items-center justify-center" style={{ width: 280, height: 300 }}>
+          <motion.div
+            initial={{ y: 60, opacity: 0, scale: 0.75 }}
+            animate={{ y: 0,  opacity: 1, scale: 1.00 }}
+            transition={{ delay: 0.25, duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <CatCanvas emotion="welcome" width={280} height={300} />
+          </motion.div>
+
+          {/* Speech bubble — floats above cat's head */}
+          <motion.div
+            initial={{ opacity: 0, y: 8, scale: 0.88 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ delay: 1.3, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute left-1/2 text-center"
+            style={{ top: -10, transform: 'translateX(-20%)' }}
+          >
+            <div
+              className="relative px-4 py-3 rounded-2xl whitespace-nowrap"
+              style={{
+                background: 'rgba(255,255,255,0.09)',
+                border: '1px solid rgba(196,181,253,0.25)',
+                backdropFilter: 'blur(12px)',
+              }}
+            >
+              <p className="text-[9px] font-bold uppercase tracking-widest text-lavender-300/60 mb-1">
+                Your guide
+              </p>
+              <p className="text-white/75 text-xs leading-relaxed">
+                Hi! I'm <span className="text-lavender-300 font-semibold">Boby</span>, Phượng's assistant.
+              </p>
+              <p className="text-white/45 text-xs leading-relaxed mt-0.5 italic font-light">
+                Let's explore her journey together ✨
+              </p>
+              {/* Tail pointing down toward cat */}
+              <div
+                className="absolute left-1/2 -bottom-2.5"
+                style={{
+                  transform: 'translateX(-50%)',
+                  width: 0, height: 0,
+                  borderLeft: '8px solid transparent',
+                  borderRight: '8px solid transparent',
+                  borderTop: '10px solid rgba(255,255,255,0.09)',
+                }}
+              />
+            </div>
+          </motion.div>
+        </div>
 
         {/* Book-cover text */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left">

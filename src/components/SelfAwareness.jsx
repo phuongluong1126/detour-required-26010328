@@ -192,6 +192,22 @@ export default function SelfAwareness() {
           </motion.div>
         </AnimatePresence>
 
+        {/* Three-lens synthesis */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-6 bg-gradient-to-r from-lavender-50 to-blush-50 border border-lavender-100 rounded-2xl px-6 py-4 flex items-start gap-3"
+        >
+          <div className="w-1 self-stretch rounded-full bg-gradient-to-b from-lavender-400 to-blush-400 shrink-0 mt-0.5" />
+          <p className="text-plum-700/65 text-sm leading-relaxed font-light">
+            <span className="font-semibold text-plum-800">Across all three lenses, the pattern is consistent:</span>{' '}
+            I lead through understanding, not volume — structural in thinking, empathetic in approach, and most effective when people feel genuinely safe around me.
+          </p>
+        </motion.div>
+
+
         {/* ── "Beyond the labels" — two personal photos ── */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -211,15 +227,18 @@ export default function SelfAwareness() {
               whileInView={{ opacity: 1, scale: 1, rotate: -1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-white rounded-2xl overflow-hidden shadow-md border border-lavender-100 cursor-default"
+              className="bg-white rounded-2xl overflow-hidden shadow-md border border-lavender-100"
               style={{ transform: 'rotate(-1.5deg)' }}
             >
-              <div className="overflow-hidden" style={{ height: 200 }}>
-                <img
-                  src="/photos/anh3.jpg"
-                  alt="Vietnam Mountain Marathon - Sapa"
-                  className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
-                />
+              <div className="relative overflow-hidden group cursor-pointer" style={{ height: 200 }}
+                onClick={() => window.__openLightbox?.({ src: '/photos/anh3.jpg', alt: 'Trail running · Sapa', caption: "I know discomfort. It doesn't stop me — it just becomes part of the plan." })}>
+                <img src="/photos/anh3.jpg" alt="Vietnam Mountain Marathon - Sapa"
+                  className="w-full h-full object-cover object-center transition-opacity duration-300 group-hover:opacity-70" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: 'rgba(20,8,44,0.45)', backdropFilter: 'blur(2px)' }}>
+                  <span className="text-xl">🔍</span>
+                  <p className="text-white text-xs font-semibold">Click to view</p>
+                </div>
               </div>
               <div className="p-4">
                 <p className="text-plum-900 font-semibold text-sm">Trail running · Sapa</p>
@@ -235,15 +254,24 @@ export default function SelfAwareness() {
               whileInView={{ opacity: 1, scale: 1, rotate: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-white rounded-2xl overflow-hidden shadow-md border border-lavender-100 cursor-default"
+              className="bg-white rounded-2xl overflow-hidden shadow-md border border-lavender-100"
               style={{ transform: 'rotate(1.5deg)' }}
             >
-              <div className="overflow-hidden" style={{ height: 200 }}>
+              <div
+                className="relative overflow-hidden group cursor-pointer"
+                style={{ height: 200 }}
+                onClick={() => window.__openLightbox?.({ src: '/photos/anh6.png', alt: 'La Ban Peak · Nui Dinh', caption: "Self-awareness also means knowing what you're capable of when you choose to push." })}
+              >
                 <img
                   src="/photos/anh6.png"
                   alt="La Ban Peak, Nui Dinh mountain"
-                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-top transition-opacity duration-300 group-hover:opacity-70"
                 />
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: 'rgba(20,8,44,0.45)', backdropFilter: 'blur(2px)' }}>
+                  <span className="text-xl">🔍</span>
+                  <p className="text-white text-xs font-semibold">Click to view</p>
+                </div>
               </div>
               <div className="p-4">
                 <p className="text-plum-900 font-semibold text-sm">La Ban Peak · Nui Dinh</p>

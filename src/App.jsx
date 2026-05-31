@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
+import MusicPlayer from './components/MusicPlayer'
+import ImageLightbox from './components/ImageLightbox'
 import Hero from './components/Hero'
 import Journey from './components/Journey'
 import SelfAwareness from './components/SelfAwareness'
@@ -13,6 +15,11 @@ import ChapterReveal, { PrologueScene } from './components/ChapterReveal'
 
 export default function App() {
   const [showPrologue, setShowPrologue] = useState(true)
+  const [lightboxImage, setLightboxImage] = useState(null)
+  useEffect(() => {
+    window.__openLightbox = (img) => setLightboxImage(img)
+    return () => delete window.__openLightbox
+  }, [])
 
   /* Auto-dismiss prologue after 4.8 s (matches timer bar) */
   useEffect(() => {
@@ -36,6 +43,8 @@ export default function App() {
       {/* ── Persistent fixed overlays ── */}
       <StoryProgress />
       <Navbar />
+      <MusicPlayer />
+      <ImageLightbox image={lightboxImage} onClose={() => setLightboxImage(null)} />
 
       {/* ── Chapter 00 · Prologue / Hero ── */}
       <div className="story-chapter">

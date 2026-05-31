@@ -13,7 +13,7 @@ const gaps = [
   {
     icon: Archive,
     title: 'Holding on too long',
-    theory: 'Growth Mindset',
+    theory: 'Emotional Intelligence',
     desc: 'I find it hard to let things go. I worry that stopping means the time I already spent was wasted. So I keep going, even when it no longer makes sense.',
     honest: 'Not commitment. Closer to an inability to walk away from a sunk cost.',
     color: 'rose',
@@ -30,7 +30,7 @@ const gaps = [
     icon: EyeOff,
     title: 'Not visible enough',
     theory: 'Authentic Leadership',
-    desc: 'I contribute quietly and trust the work will be noticed. In practice, leaders who cannot make their thinking visible are often overlooked — regardless of how strong that thinking is.',
+    desc: 'I contribute quietly and trust the work will be noticed. Authentic Leadership asks for something different — making my thinking, values, and reasoning visible so others can follow them. Not louder. Just clearer.',
     honest: 'Being genuinely useful is not enough if nobody can see you being useful.',
     color: 'violet',
   },
@@ -99,9 +99,20 @@ export default function Gaps() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="text-center text-plum-700/60 mb-14 max-w-lg mx-auto text-base font-light leading-relaxed"
+          className="text-center text-plum-700/60 mb-6 max-w-lg mx-auto text-base font-light leading-relaxed"
         >
           A leadership reflection that only lists strengths is not very honest. Here is where I genuinely fall short.
+        </motion.p>
+
+        {/* Summary sentence */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="text-center text-plum-700/50 mb-12 max-w-xl mx-auto text-sm italic font-light leading-relaxed border-l-2 border-amber-300 pl-4 text-left"
+        >
+          My key leadership gap is learning how to turn deep thinking into clearer decisions, visible contribution, and sustainable focus.
         </motion.p>
 
         {/* Gap cards */}

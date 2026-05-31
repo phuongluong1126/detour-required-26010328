@@ -181,6 +181,53 @@ function HeroConstellation() {
             </Float>
           </Suspense>
         </Canvas>
+
+        {/* Boby speech bubble above head */}
+        <motion.div
+          initial={{ opacity: 0, y: 8, scale: 0.88 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ delay: 1.8, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          style={{
+            position: 'absolute',
+            top: -10,
+            left: '50%',
+            transform: 'translateX(-55%)',
+            whiteSpace: 'nowrap',
+            pointerEvents: 'none',
+          }}
+        >
+          <div
+            style={{
+              background: 'rgba(255,255,255,0.08)',
+              border: '1px solid rgba(196,181,253,0.28)',
+              backdropFilter: 'blur(12px)',
+              borderRadius: 16,
+              padding: '8px 14px',
+              textAlign: 'center',
+            }}
+          >
+            <p style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(196,181,253,0.6)', marginBottom: 3 }}>
+              Boby · Your guide
+            </p>
+            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.75)', lineHeight: 1.5 }}>
+              Hi! I'm <strong style={{ color: '#c4b5fd' }}>Boby</strong>, Phượng's assistant.
+            </p>
+            <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)', fontStyle: 'italic', marginTop: 2 }}>
+              Let's explore her journey ✨
+            </p>
+            {/* Tail pointing down */}
+            <div style={{
+              position: 'absolute',
+              bottom: -9,
+              left: '55%',
+              transform: 'translateX(-50%)',
+              width: 0, height: 0,
+              borderLeft: '7px solid transparent',
+              borderRight: '7px solid transparent',
+              borderTop: '9px solid rgba(255,255,255,0.08)',
+            }} />
+          </div>
+        </motion.div>
       </motion.div>
 
       {/* Role nodes */}

@@ -34,8 +34,12 @@ const trustItems = [
 ]
 
 const coreValues = [
-  'Win-Win Mindset', 'Authenticity', 'Fairness', 'Mutual Respect',
-  'Growth Through Competence', 'Psychological Safety',
+  { label: 'Win-Win Mindset',          why: 'I cannot lead well if I treat others as a means to an end.' },
+  { label: 'Authenticity',             why: 'People follow someone real before they follow someone polished.' },
+  { label: 'Fairness',                 why: 'Consistency in how I treat people is what makes trust last.' },
+  { label: 'Mutual Respect',           why: 'I expect to be challenged — and I challenge others the same way.' },
+  { label: 'Growth Through Competence',why: 'I believe in earning confidence through mastery, not just positivity.' },
+  { label: 'Psychological Safety',     why: 'Nothing good gets said in a room where people are afraid to speak.' },
 ]
 
 const colorMap = {
@@ -171,6 +175,24 @@ export default function Values() {
           })}
         </div>
 
+        {/* Trust callout */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-14 bg-white/60 border border-lavender-100 rounded-2xl px-6 py-4 flex items-center gap-3"
+          style={{ backdropFilter: 'blur(10px)' }}
+        >
+          <div className="w-1 self-stretch rounded-full bg-gradient-to-b from-rose-400 to-blush-400 shrink-0" />
+          <p className="text-plum-700/65 text-sm leading-relaxed font-light">
+            <span className="font-semibold text-plum-800">Current trust strength:</span>{' '}
+            <span className="text-rose-500 font-medium">Intimacy</span> — people feel safe being honest around me.{' '}
+            <span className="font-semibold text-plum-800">Next priority:</span>{' '}
+            <span className="text-blush-500 font-medium">Reliability</span> — moving into PM means proving I can deliver through coordination, not just solo work.
+          </p>
+        </motion.div>
+
         {/* Core values */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -180,18 +202,19 @@ export default function Values() {
           className="text-center"
         >
           <p className="text-xs text-plum-700/40 uppercase tracking-widest mb-5 font-medium">Core Values</p>
-          <div className="flex flex-wrap justify-center gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-left">
             {coreValues.map((v, i) => (
-              <motion.span
-                key={v}
-                initial={{ opacity: 0, scale: 0.85 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+              <motion.div
+                key={v.label}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07 }}
-                className="px-4 py-2 rounded-full border border-lavender-200 text-plum-700/70 text-sm bg-white/60 hover:bg-lavender-50 hover:border-lavender-400 hover:text-lavender-700 transition-all duration-200 cursor-default"
+                className="bg-white/60 border border-lavender-100 rounded-xl px-4 py-3 hover:border-lavender-300 hover:bg-lavender-50/50 transition-all duration-200 cursor-default"
               >
-                {v}
-              </motion.span>
+                <p className="text-plum-900 font-semibold text-sm mb-1">{v.label}</p>
+                <p className="text-plum-700/50 text-xs font-light leading-relaxed italic">{v.why}</p>
+              </motion.div>
             ))}
           </div>
         </motion.div>

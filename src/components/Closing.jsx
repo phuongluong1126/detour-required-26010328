@@ -1,8 +1,36 @@
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { startMusic } from './MusicPlayer'
+import ParticleBurst from './ParticleBurst'
 
 export default function Closing() {
+  const sectionRef = useRef(null)
+  const [burst, setBurst] = useState(false)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          startMusic()
+          setBurst(true)
+          // If audio wasn't unlocked yet, show the tap hint
+          window.__musicNeedsTap?.()
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.3 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   return (
+    <>
+    <ParticleBurst trigger={burst} />
     <section
+      ref={sectionRef}
       className="relative py-36 overflow-hidden"
       style={{
         background: 'linear-gradient(160deg, #2d1b4e 0%, #1a0d2e 40%, #3d1528 100%)',
@@ -42,9 +70,22 @@ export default function Closing() {
           transition={{ duration: 0.9 }}
         >
           {/* Label */}
-          <p className="text-lavender-300/60 text-xs uppercase tracking-[0.3em] font-medium mb-10">
+          <p className="text-lavender-300/60 text-xs uppercase tracking-[0.3em] font-medium mb-6">
             Leadership Development Studies
           </p>
+
+          {/* Leadership identity statement */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="mb-10 inline-block px-5 py-3 rounded-2xl border border-white/10 text-white/50 text-sm font-light leading-relaxed"
+            style={{ background: 'rgba(255,255,255,0.05)' }}
+          >
+            A leader who combines structured thinking with genuine care for people —
+            making complexity simple and safe to navigate.
+          </motion.div>
 
           {/* Big quote */}
           <div className="mb-10">
@@ -74,9 +115,20 @@ export default function Closing() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="text-white/40 text-sm font-light italic mb-10 max-w-lg mx-auto leading-relaxed"
+            className="text-white/40 text-sm font-light italic mb-5 max-w-lg mx-auto leading-relaxed"
           >
             This portfolio is not a finished story. It is a current one — still being written, one deliberate step at a time.
+          </motion.p>
+
+          {/* Added line */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className="text-lavender-300/60 text-sm font-light italic mb-10 max-w-lg mx-auto leading-relaxed"
+          >
+            My goal is not to become a louder leader, but a clearer and more reliable one.
           </motion.p>
 
           {/* LDS concepts */}
@@ -115,15 +167,23 @@ export default function Closing() {
             <div className="flex items-end justify-center gap-5">
               {/* Polaroid */}
               <div
-                className="relative bg-white/90 p-2.5 pb-8 rounded shadow-2xl cursor-default select-none"
+                className="relative bg-white/90 p-2.5 pb-8 rounded shadow-2xl select-none group cursor-pointer"
+                onClick={() => window.__openLightbox?.({ src: '/photos/anh5.jpg', alt: 'Gau Bu · Chief Motivation Officer', caption: 'The one who waited at home through all of this. Thank you for your effort to read all ^^' })}
                 style={{ transform: 'rotate(-3deg)', maxWidth: 190 }}
               >
-                <img
-                  src="/photos/anh5.jpg"
-                  alt="Gau Bu yawning"
-                  className="w-full rounded"
-                  style={{ height: 150, objectFit: 'cover', objectPosition: 'center 30%' }}
-                />
+                <div className="relative">
+                  <img
+                    src="/photos/anh5.jpg"
+                    alt="Gau Bu yawning"
+                    className="w-full rounded transition-opacity duration-300 group-hover:opacity-70"
+                    style={{ height: 150, objectFit: 'cover', objectPosition: 'center 30%' }}
+                  />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded"
+                    style={{ background: 'rgba(20,8,44,0.45)', backdropFilter: 'blur(2px)' }}>
+                    <span className="text-lg">🔍</span>
+                    <p className="text-white text-[10px] font-semibold">Click to view</p>
+                  </div>
+                </div>
                 <p className="absolute bottom-1.5 left-0 right-0 text-center text-plum-700/60 text-[9px] italic font-light">
                   Gau Bu · Chief Motivation Officer
                 </p>
@@ -156,6 +216,58 @@ export default function Closing() {
             </p>
           </motion.div>
 
+          {/* Gift — music */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-12 max-w-sm mx-auto"
+          >
+            <p className="text-white/25 text-xs italic mb-4 leading-relaxed">
+              My gift for your effort to read all — the song that inspired me:
+            </p>
+            <div
+              className="rounded-2xl px-6 py-5 text-left"
+              style={{
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(167,139,250,0.15)',
+              }}
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <motion.span
+                  animate={{ opacity: [0.5, 1, 0.5] }}
+                  transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
+                  className="text-base"
+                >
+                  🎵
+                </motion.span>
+                <div>
+                  <p className="text-white/60 text-xs font-semibold">Dreamers</p>
+                  <p className="text-white/25 text-[10px]">FIFA World Cup 2022</p>
+                </div>
+              </div>
+              {[
+                'Look who we are, we are the dreamers',
+                "We make it happen, 'cause we believe it",
+                'Look who we are, we are the dreamers',
+                "We make it happen 'cause we can see it",
+              ].map((line, i) => (
+                <motion.p
+                  key={i}
+                  initial={{ opacity: 0, x: -8 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6 + i * 0.15, duration: 0.5 }}
+                  className="text-sm italic font-light leading-relaxed"
+                  style={{ color: i % 2 === 0 ? 'rgba(196,181,253,0.7)' : 'rgba(249,168,212,0.6)' }}
+                >
+                  {line}
+                </motion.p>
+              ))}
+            </div>
+          </motion.div>
+
           {/* Back to top */}
           <motion.a
             href="#home"
@@ -180,5 +292,6 @@ export default function Closing() {
         </p>
       </div>
     </section>
+    </>
   )
 }

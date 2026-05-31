@@ -53,10 +53,10 @@ const roles = [
     imgPos: 'center center',
     img: '/photos/mba_class.jpg',
     description:
-      'About stepping back. Technical work keeps you focused on how. Business thinking forces you to ask why — why this project, for whom, what is the actual value.',
-    lesson: 'Business thinking & long-term vision',
+      'About stepping back. Seeing how people from different industries solve the same human problems made me realise that leadership is less about giving direction and more about designing the conditions for others to move well.',
+    lesson: 'People thinking & systems design',
     lessonDetail:
-      'Studying alongside people from different industries has expanded how I think about problems and what good leadership actually looks like.',
+      'The biggest shift was learning to ask not just how something works, but why it exists and who it serves. Technical execution matters less if the system around people is broken.',
   },
 ]
 
@@ -167,15 +167,24 @@ export default function Journey() {
                 className={`group card-light overflow-hidden hover:-translate-y-1`}
               >
                 {/* Image */}
-                <div className="relative h-60 overflow-hidden mb-5">
+                <div
+                  className="relative h-60 overflow-hidden mb-5 cursor-pointer"
+                  onClick={() => window.__openLightbox?.({ src: role.img, alt: role.title, caption: role.lessonDetail })}
+                >
                   <img
                     src={role.img}
                     alt={role.title}
-                    className="w-full h-full object-cover opacity-80 group-hover:opacity-95 group-hover:scale-105 transition-all duration-500"
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-70 transition-all duration-300"
                     style={{ objectPosition: role.imgPos || 'center center' }}
                   />
                   <div className={`absolute inset-0 bg-gradient-to-t ${c.bg.replace('bg-', 'from-').replace('/80','')}/80 via-transparent to-transparent`} />
                   <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent" />
+                  {/* Hover hint */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{ background: 'rgba(20,8,44,0.45)', backdropFilter: 'blur(2px)' }}>
+                    <span className="text-xl">🔍</span>
+                    <p className="text-white text-xs font-semibold tracking-wide">Click to view</p>
+                  </div>
 
                   {/* Chapter badge */}
                   <div className={`absolute top-3 left-3 px-2.5 py-1 rounded-full ${c.bg} ${c.border} border text-[10px] font-bold uppercase tracking-widest ${c.accent}`}>
